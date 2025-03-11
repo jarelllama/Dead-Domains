@@ -1,2 +1,3 @@
 # Dead-Domains
-Check for dead domains in https://github.com/jarelllama/Scam-Blocklist.
+
+Check for dead domains in **[jarelllama/Scam-Blocklist](https://github.com/jarelllama/Scam-Blocklist)**.
