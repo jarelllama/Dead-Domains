@@ -1,3 +1,3 @@
-# Dead-Domains
+# Dead Domains for [jarelllama/Scam-Blocklist](https://github.com/jarelllama/Scam-Blocklist)
 
-Check for dead domains in **[jarelllama/Scam-Blocklist](https://github.com/jarelllama/Scam-Blocklist)**.
+Checks for dead and resurrected domains in **[jarelllama/Scam-Blocklist](https://github.com/jarelllama/Scam-Blocklist)**.

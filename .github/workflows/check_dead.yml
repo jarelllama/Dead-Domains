@@ -1,0 +1,50 @@
+name: Check dead domains
+run-name: Check dead domains
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 * * *'
+permissions:
+  contents: write
+
+jobs:
+  check-dead-domains:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Get files
+        run: |
+            url='https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/refs/heads/main'
+
+            curl -sSL --retry 2 --retry-all-errors \
+              "${url}/scripts/check_dead.sh" -o check_dead.sh
+
+            curl -sSL --retry 2 --retry-all-errors \
+              "${url}/data/raw.txt" -o RAW.txt
+
+            curl -sSL --retry 2 --retry-all-errors \
+              "${url}/data/dead_domains.txt" -o DEAD_DOMAINS.txt
+
+      - name: Check for resurrected domains
+        run: bash check_dead.sh --check-alive DEAD_DOMAINS.txt
+
+      - name: Check for dead domains (part 1)
+        run: bash check_dead.sh --check-dead-part-1 RAW.txt
+
+      - name: Check for dead domains (part 2)
+        run: bash check_dead.sh --check-dead-part-2 RAW.txt
+
+      - name: Cleanup
+        run: rm DEAD_DOMAINS.txt RAW.txt
+
+      - name: Push
+        run: |
+          git config user.email ${{ vars.GIT_EMAIL }}
+          git config user.name ${{ vars.GIT_USERNAME }}
+          git add .
+          git diff-index --quiet HEAD || git commit -m "$(date +"%d-%m-%Y %H:%M:%S")"
+          git push -q
