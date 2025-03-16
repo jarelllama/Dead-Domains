@@ -30,7 +30,8 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "$(date +"%d-%m-%Y")"
           git push -q
 
-  check-resurrected-domains:
+  check-resurrected:
+    needs: get-files
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -55,6 +56,7 @@ jobs:
           git push -q
 
   check-dead-part-1:
+    needs: check-resurrected
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -79,6 +81,7 @@ jobs:
           git push -q
 
   check-dead-part-2:
+    needs: check-dead-part-1
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
