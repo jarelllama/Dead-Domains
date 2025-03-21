@@ -52,7 +52,7 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "$(TZ=Asia/Singapore date +"%d-%m-%Y")"
+          git diff-index --quiet HEAD || git commit -m "Get resurrected domains"
           git push -q
 
   check-dead-part-1:
@@ -77,7 +77,7 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "$(TZ=Asia/Singapore date +"%d-%m-%Y")"
+          git diff-index --quiet HEAD || git commit -m "Get dead domains (part 1)"
           git push -q
 
   check-dead-part-2:
@@ -102,5 +102,5 @@ jobs:
           git config user.email ${{ vars.GIT_EMAIL }}
           git config user.name ${{ vars.GIT_USERNAME }}
           git add .
-          git diff-index --quiet HEAD || git commit -m "$(TZ=Asia/Singapore date +"%d-%m-%Y")"
+          git diff-index --quiet HEAD || git commit -m "Get dead domains (part 2)"
           git push -q
